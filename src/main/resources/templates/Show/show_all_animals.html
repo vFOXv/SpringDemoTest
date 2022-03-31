@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Список всех животных из DB</title>
+</head>
+<body>
+<h3>Список всех животных из DB</h3>
+<hr>
+<br>
+<table border ="1">
+    <tr style="background: gray">
+        <td>id</td>
+        <td>Kind</td>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Owner</td>
+        <td>Delete</td>
+    </tr>
+    <tr th:each="animal:${AllAnimals}">
+        <td th:text="${animal.id}"></td>
+        <td th:text="${animal.kind}"></td>
+        <td th:text="${animal.name}"></td>
+        <td th:text="${animal.age}"></td>
+        <td th:text="${animal.ownerId}"></td>
+        <td th:text="${DeleteThisAnimal}"></td>
+    </tr>
+</table>
+<br>
+<hr>
+<br>
+<a href="/">Возврат в меню приложения.</a>
+</body>
+</html>
