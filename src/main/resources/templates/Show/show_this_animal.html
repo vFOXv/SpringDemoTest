@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Конкретное животное.</title>
+</head>
+<body>
+<h3>Конкретное животное из DB</h3>
+<hr>
+<br>
+<table border ="1">
+    <tr>
+        <td>id</td>
+        <td th:text="${thisAnimal.id}"></td>
+    </tr>
+    <tr>
+        <td>Kind</td>
+        <td th:text="${thisAnimal.kind}"></td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td th:text="${thisAnimal.name}"></td>
+    </tr>
+    <tr>
+        <td>age</td>
+        <td th:text="${thisAnimal.age}"></td>
+    </tr>
+    <tr>
+        <td>Owner</td>
+        <td th:text="${thisAnimal.ownerId}"></td>
+    </tr>
+    <tr>
+        <td>Action</td>
+        <td><a th:href="@{/action/deleteThisAnimal/{id}(id=${thisAnimal.getId()})}" th:text="${Delete}"></a></td>
+    </tr>
+</table>
+<br>
+<hr>
+<br>
+<a href="/">Возврат в меню приложения.</a>
+</body>
+</html>

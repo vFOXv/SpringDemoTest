@@ -23,4 +23,16 @@ public class AnimalService {
     public Animal searchById(Long id){
         return animalRepository.getById(id);
     }
+
+    //сохранение нового животного в DB
+    public void saveByDb(Animal animal){
+        animalRepository.save(animal);
+    }
+
+    //удаление конкретного животного из DB
+    public void deleteByDb(Long id){
+        Animal animal = searchById(id);
+        animalRepository.delete(animal);
+    }
+
 }

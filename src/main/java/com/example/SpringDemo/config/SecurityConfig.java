@@ -26,9 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //antMatchers() указывает к каким конкретно ресурсам
                 .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.GET,"/api/**").hasAnyRole(Role.ADMIN.name(),Role.USER.name())
-                .antMatchers(HttpMethod.POST,"/api/**").hasAnyRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.DELETE,"/api/**").hasAnyRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.GET,"/show/**").hasAnyRole(Role.ADMIN.name(),Role.USER.name())
+                .antMatchers(HttpMethod.POST,"/action/**").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.DELETE,"/action/**").hasRole(Role.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()

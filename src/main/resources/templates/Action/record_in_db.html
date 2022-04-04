@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись животного в DB</title>
+</head>
+<body>
+<h3>Запись текста в DB (работает только с английской раскладкой)</h3>
+<br>
+<hr>
+<form th:action="@{/action/recordNewAnimalInDb}" th:object="${newAnimal}" method = "POST">
+    <p>Kind: <input type="text" th:field="*{kind}"/></p>
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p>Age: <input type="number" th:field="*{age}"/></p>
+    <!-- хозяев потом надо переделать на выпадающее меню   -->
+    <p>Owner: <input type="number" th:field="*{ownerId}"/></p>
+    <p><input type="submit" value="SAVE"/></p>
+</form>
+<br>
+<hr>
+<a th:href="@{/}">Меню</a>
+</body>
+</html>

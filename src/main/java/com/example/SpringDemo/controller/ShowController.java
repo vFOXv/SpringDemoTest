@@ -5,6 +5,7 @@ import com.example.SpringDemo.service.AnimalService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -23,7 +24,25 @@ public class ShowController {
     public String showAllAnimals(Model model){
         List<Animal> animals = animalService.getAllAnimals();
         model.addAttribute("AllAnimals", animals);
-        model.addAttribute("DeleteThisAnimal", "Delete");
+        model.addAttribute("ThisAnimal", "This animal");
         return "Show/show_all_animals";
+    }
+
+    @GetMapping("/{id}")
+    public String showThisAnimal(@PathVariable("id") Long id, Model model){
+        Animal animal = new Animal();
+        animal = animalService.searchById(id);
+        model.addAttribute("thisAnimal", animal);
+        model.addAttribute("Delete", "DELETE");
+        return "Show/show_this_animal";
+    }
+
+    @GetMapping("/methodDelete/{id}")
+    public String showThisAnimalMethodDelete(@PathVariable("id") Long id, Model model){
+        Animal animal = new Animal();
+        animal = animalService.searchById(id);
+        model.addAttribute("thisAnimal", animal);
+        model.addAttribute("Delete", "Method DELETE");
+        return "Show/show_this_animal_delete";
     }
 }

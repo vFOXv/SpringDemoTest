@@ -19,16 +19,16 @@ public class Animal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 2, max = 10)
+//    @Size(min = 2, max = 10)
     private String kind;
 
-    @Size(min = 2, max = 10)
+//    @Size(min = 2, max = 10)
     private String name;
 
-    @Size(min = 2, max = 10)
+//    @Size(min = 2, max = 10)
     private Long age;
 
     @Column(name = "owner_id")
-    @Size(min = 2, max = 10)
+//    @Size(min = 2, max = 10)
     private Long ownerId;
 }

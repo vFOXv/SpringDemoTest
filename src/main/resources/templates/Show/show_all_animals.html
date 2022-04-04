@@ -15,7 +15,8 @@
         <td>Name</td>
         <td>Age</td>
         <td>Owner</td>
-        <td>Delete</td>
+        <td>This Animal</td>
+        <td>This Animal Method DELETE</td>
     </tr>
     <tr th:each="animal:${AllAnimals}">
         <td th:text="${animal.id}"></td>
@@ -23,7 +24,8 @@
         <td th:text="${animal.name}"></td>
         <td th:text="${animal.age}"></td>
         <td th:text="${animal.ownerId}"></td>
-        <td th:text="${DeleteThisAnimal}"></td>
+        <td><a th:href="@{/show/{id}(id=${animal.getId()})}" th:text="${ThisAnimal}"></a></td>
+        <td><a th:href="@{/show/methodDelete/{id}(id=${animal.getId()})}" th:text="${ThisAnimal}"></a></td>
     </tr>
 </table>
 <br>
