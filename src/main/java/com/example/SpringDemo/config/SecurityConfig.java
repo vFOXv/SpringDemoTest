@@ -39,12 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //преопределяеться метод с HttpSecurity http
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                //.csrf().disable()
                 //аутинфикация пользователя(к каким ресурсам
                 // пользователь имеет доступ)
                 .authorizeRequests()
-                //antMatchers() указывает к каким конкретно ресурсам(всех пускают в корень)
-                .antMatchers("/").permitAll()
+                //antMatchers() указывает к каким конкретно ресурсам(всех пускают в корень и страница регистрации)
+                .antMatchers("/","/security/registration").permitAll()
                 //в "/profile" только аутинфицированных
                 //.antMatchers("/profile/**").authenticated()
                 //пропуск по ролям - разрешен доступ ADMIN and SUPERADMIN

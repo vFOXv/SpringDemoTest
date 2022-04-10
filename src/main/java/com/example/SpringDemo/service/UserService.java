@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,5 +58,15 @@ public class UserService implements UserDetailsService {
     //получение списка всех записей из BD
     public List<User> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    //запись в DB нового пользователя(user)
+    public Boolean saveUser(User newUser){
+        User userFromDB = userRepository.findByUsername(newUser.getUsername());
+        if(userFromDB!=null) {//если уже существует
+            return false;
+        }
+        userRepository.save(newUser);
+        return true;
     }
 }
