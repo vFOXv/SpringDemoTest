@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -21,8 +22,11 @@ public class ShowController {
     }
 
     @GetMapping("/all")
-    public String showAllAnimals(Model model){
+    //Principal краткая информация о user
+    public String showAllAnimals(Model model, Principal principal){
         List<Animal> animals = animalService.getAllAnimals();
+        //Получение имени user
+        model.addAttribute("NameUser", principal.getName());
         model.addAttribute("AllAnimals", animals);
         model.addAttribute("ThisAnimal", "This animal");
         return "Show/show_all_animals";

@@ -2,10 +2,35 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Start</title>
+    <title>Аутентификация</title>
 </head>
 <body>
-<h1>START</h1>
+<h1>Аутентификация</h1>
+<hr>
+<br>
+<table border="1">
+    <tr style="background: gray">
+        <td>Id</td>
+        <td>UserName</td>
+        <td>Password</td>
+        <td>Email</td>
+    </tr>
+    <tr th:each="thisUser:${myAllUsers}">
+        <td th:text="${thisUser.id}"></td>
+        <td th:text="${thisUser.username}"></td>
+        <td th:text="${thisUser.password}"></td>
+        <td th:text="${thisUser.email}"></td>
+    </tr>
+</table>
+<br>
+<hr>
+<br>
+<a th:href="@{/login}">Аутентификация</a>
+<br>
+<a th:href="@{/logout}">Разлогинивание</a>
+<br>
+<a th:href="@{/security/registration}">Регистрация нового пользователя</a>
+<br>
 <br>
 <a th:href="@{/show/all}">Показать список всех животных.</a>
 <br>

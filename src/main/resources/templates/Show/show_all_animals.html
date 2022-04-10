@@ -6,6 +6,7 @@
 </head>
 <body>
 <h3>Список всех животных из DB</h3>
+<strong>Привет пользователь - </strong><ins th:text="${NameUser}"></ins>
 <hr>
 <br>
 <table border ="1">
@@ -32,5 +33,7 @@
 <hr>
 <br>
 <a href="/">Возврат в меню приложения.</a>
+<br>
+<a th:href="@{/logout}">Разлогинивание</a>
 </body>
 </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация нового пользователя</title>
+</head>
+<body>
+<h3>Регистрация нового пользователя</h3>
+<form action="/registration" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    <br>
+    Login Name
+    <label>
+        <input type="text" name="username" placeholder="Login Name">
+    </label>
+    <br>
+    Email
+    <label>
+        <input type="email" name="email" placeholder="email">
+    </label>
+    <br>
+    Password
+    <label>
+        <input type="password" name="password" placeholder="password">
+    </label>
+    <br>
+    <input type="submit" value="Registration">
+    <br>
+</form>
+</body>
+</html>
