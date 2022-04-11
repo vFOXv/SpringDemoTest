@@ -36,6 +36,7 @@
     </table>
     <br>
 <form th:method="DELETE" th:action="@{/action/ThisAnimalMethodDelete/{id}(id=${thisAnimal.getId()})}" th:object="${thisAnimal}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     <p><input type="submit" value="DELETE"/></p>
 </form>
 <br>

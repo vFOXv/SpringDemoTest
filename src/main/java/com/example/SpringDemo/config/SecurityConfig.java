@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -33,27 +34,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userService = userService;
     }
 
-
-
     @Override
     //преопределяеться метод с HttpSecurity http
     protected void configure(HttpSecurity http) throws Exception {
         http
                 //.csrf().disable()
-                //аутинфикация пользователя(к каким ресурсам
-                // пользователь имеет доступ)
+                //включение авторизации
                 .authorizeRequests()
                 //antMatchers() указывает к каким конкретно ресурсам(всех пускают в корень и страница регистрации)
                 .antMatchers("/","/security/registration").permitAll()
+
+                //.antMatchers("/security/registration").anonymous()
+                //.antMatchers(HttpMethod.POST, "/security/**").permitAll()
                 //в "/profile" только аутинфицированных
                 //.antMatchers("/profile/**").authenticated()
                 //пропуск по ролям - разрешен доступ ADMIN and SUPERADMIN
                 //.antMatchers("/admin/**").hasAnyRole("ADMIN","SUPERADMIN")
+
                 .antMatchers(HttpMethod.GET, "/show/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/action/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/action/**").hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
+
+                //все остальные запросы(показ остальных страниц) требуют авторизации
+                .anyRequest().authenticated()
                 .and()
                 //маленькое окошко для аутификации
                 //.httpBasic();
@@ -63,56 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //после логаута пользователь попадает на корневую страницу(а не на страницу логина и пароля)
                 .logout().logoutSuccessUrl("/");
     }
-
-//    @Bean
-//    @Override
-//    protected UserDetailsService userDetailsService() {
-//        return new InMemoryUserDetailsManager(
-//                // user должен быть SpringSecurity !!!
-//                User.builder()
-//                        .username("admin")
-//                        .password(passwordEncoder().encode("admin"))
-//                        .roles(Role.ADMIN.name())
-//                        .build(),
-//                User.builder()
-//                        .username("user")
-//                        .password(passwordEncoder().encode("user"))
-//                        .roles(Role.USER.name())
-//                        .build()
-//        );
-//    }
-
-//        @Bean
-//    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource){
-////    создание пользователей
-//        UserDetails user = User.builder()
-//                .username("admin")
-//                //https://bcrypt-generator.com/  admin
-//                .password("{bcrypt}$2a$12$7EjCbvCYnvs1Pmq8Joz2SOb69Jol8IrY94f22Tbwtpxw3EDgGcl9S")
-//                .roles(Role.ADMIN.name(),Role.USER.name())
-//                .build();
-//        UserDetails admin = User.builder()
-//                .username("user")
-//                //https://bcrypt-generator.com/  user
-//                .password("{bcrypt}$2a$12$8X.0ZxcMJor2nCVRv/6TPe3W.yJWn6ehNuXQOkC/utYaUxk26yM2u")
-//                .roles(Role.USER.name())
-//                .build();
-//        //создание списка пользователей     dataSours это настройки DB в resources/application.properties
-//        //если пользователи заранее внесены в DB нужна только эта строка
-//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-//        //проверка в DB наличия конкретного пользователя и если он есть - удаление
-//        //т.к. если записать пользователя с тем же логином и паролем будет ошибка
-//        if(jdbcUserDetailsManager.userExists(user.getUsername())){
-//            jdbcUserDetailsManager.deleteUser(user.getUsername());
-//        }
-//        if(jdbcUserDetailsManager.userExists(admin.getUsername())){
-//            jdbcUserDetailsManager.deleteUser(admin.getUsername());
-//        }
-//        jdbcUserDetailsManager.createUser(user);
-//        jdbcUserDetailsManager.createUser(admin);
-//        return jdbcUserDetailsManager;
-//    }
-
 
     //преобразователь паролей(он шифрует их {bcrypt})
     @Bean

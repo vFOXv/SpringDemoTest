@@ -6,22 +6,48 @@
 </head>
 <body>
 <h3>Регистрация нового пользователя</h3>
-<form action="/registration" method="post">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+<!--<form action="/registration" method="post" >-->
+<!--    &lt;!&ndash; c таймлифом эта страница падает с ошибкой т.к. csrf == null &ndash;&gt;-->
+<!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+<!--&lt;!&ndash;    <input type="hidden" name="_csrf" value="{{_csrf.token}}">&ndash;&gt;-->
+<!--    <br>-->
+<!--    Login Name-->
+<!--    <label>-->
+<!--        <input type="text" name="username" placeholder="Login Name">-->
+<!--    </label>-->
+<!--    <br>-->
+<!--    Email-->
+<!--    <label>-->
+<!--        <input type="email" name="email" placeholder="email">-->
+<!--    </label>-->
+<!--    <br>-->
+<!--    Password-->
+<!--    <label>-->
+<!--        <input type="password" name="password" placeholder="password">-->
+<!--    </label>-->
+<!--    <br>-->
+<!--    <input type="submit" value="Registration">-->
+<!--    <br>-->
+<!--</form>-->
+
+<form th:action="@{/security/registration}" method="post" th:object="${newUser}">
+    <!-- c таймлифом эта страница падает с ошибкой т.к. csrf == null -->
+<!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
     <br>
     Login Name
     <label>
-        <input type="text" name="username" placeholder="Login Name">
+        <input type="text" th:field="*{username}">
     </label>
     <br>
     Email
     <label>
-        <input type="email" name="email" placeholder="email">
+        <input type="email" th:field="*{email}">
     </label>
     <br>
     Password
     <label>
-        <input type="password" name="password" placeholder="password">
+        <input type="password" th:field="*{password}">
     </label>
     <br>
     <input type="submit" value="Registration">

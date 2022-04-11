@@ -9,6 +9,7 @@
 <br>
 <hr>
 <form th:action="@{/action/recordNewAnimalInDb}" th:object="${newAnimal}" method = "POST">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     <p>Kind: <input type="text" th:field="*{kind}"/></p>
     <p>Name: <input type="text" th:field="*{name}"/></p>
     <p>Age: <input type="number" th:field="*{age}"/></p>
